@@ -1,17 +1,17 @@
 {
-  "name": "gulp-better-rollup",
+  "name": "@monet/gulp-better-rollup",
   "version": "3.4.0",
-  "description": "Better Gulp plugin for Rollup ES6 module bundler",
-  "author": "Mike Kovarik",
+  "description": "Better Gulp plugin for Rollup ES6 module bundler (monet fork)",
+  "author": "Nick Jacob",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/MikeKovarik/gulp-better-rollup"
+    "url": "git://github.com/AppMonet/gulp-better-rollup"
   },
   "bugs": {
-    "url": "https://github.com/MikeKovarik/gulp-better-rollup/issues"
+    "url": "https://github.com/AppMonet/gulp-better-rollup/issues"
   },
-  "homepage": "https://github.com/MikeKovarik/gulp-better-rollup",
+  "homepage": "https://github.com/AppMonet/gulp-better-rollup",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -33,6 +33,12 @@
     "vinyl-sourcemaps-apply": "^0.2.1"
   },
   "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "gulp-sourcemaps": "^2.1.1",
     "mocha": "^5.1.1",
     "should": "^13.2.1"
