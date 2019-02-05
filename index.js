@@ -95,11 +95,25 @@ class GulpRollup extends Transform {
       'namespaceToStringTag'
     ]
 
-    function generateAndApplyBundle (bundle, outputOptions, targetFile) {
-      // Sugaring the API by copying convinience objects and properties from inputOptions
-      // to outputOptions (if not defined)
-      // Directly copied from https://rollupjs.org/guide/en#outputoptions
+    function isNewOutputFormat (result) {
+      return (
+        result != null &&
+        result.output != null &&
+        result.output[0] != null &&
+        result.output[0].code != null
+      )
+    }
 
+    /**
+     * Newer versions of rollup output a different bundle object. This will retrieve code from either
+     * @param {BundleResult} result the output from rollup
+     * @return {string} code
+     */
+    function getOutputCode (result) {
+      return isNewOutputFormat(result) ? result.output[0].code : result.code
+    }
+
+    function generateAndApplyBundle (bundle, outputOptions, targetFile) {
       assignCertainProperties(outputOptions, inputOptions, propsToCopy)
       // Rollup won't bundle iife and umd modules without module name.
       // But it won't say anything either, leaving a space for confusion
@@ -129,13 +143,7 @@ class GulpRollup extends Transform {
 
         // if the output is the newer format,
         // build the buffer that way
-        targetFile.contents = Buffer.from(
-          result.output != null &&
-            result.output[0] != null &&
-            result.output[0].code
-            ? result.output[0].code
-            : result.code
-        )
+        targetFile.contents = Buffer.from(getOutputCode(result))
         // apply sourcemap to output file
         if (createSourceMap) applySourceMap(targetFile, result.map)
       })
